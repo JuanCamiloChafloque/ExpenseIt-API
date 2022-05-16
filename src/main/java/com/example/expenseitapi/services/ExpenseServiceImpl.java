@@ -1,12 +1,13 @@
 package com.example.expenseitapi.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import com.example.expenseitapi.entities.Expense;
 import com.example.expenseitapi.repositories.ExpenseRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,8 +17,8 @@ public class ExpenseServiceImpl implements ExpenseService {
     private ExpenseRepository repository;
 
     @Override
-    public List<Expense> getAllExpenses() {
-        return repository.findAll();
+    public Page<Expense> getAllExpenses(Pageable page) {
+        return repository.findAll(page);
     }
 
     @Override

@@ -1,11 +1,13 @@
 package com.example.expenseitapi.services;
 
-import java.util.List;
 import com.example.expenseitapi.entities.Expense;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface ExpenseService {
     
-    List<Expense> getAllExpenses();
+    Page<Expense> getAllExpenses(Pageable page);
     Expense getExpenseById(Long id);
     void deleteExpenseById(Long id);
     Expense createExpense(Expense expense);
