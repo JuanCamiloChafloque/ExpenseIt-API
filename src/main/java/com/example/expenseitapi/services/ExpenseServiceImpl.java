@@ -1,6 +1,7 @@
 package com.example.expenseitapi.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.example.expenseitapi.entities.Expense;
 import com.example.expenseitapi.repositories.ExpenseRepository;
@@ -17,6 +18,20 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public List<Expense> getAllExpenses() {
         return repository.findAll();
+    }
+
+    @Override
+    public Expense getExpenseById(Long id) {
+        Optional<Expense> expense = repository.findById(id);
+        if(expense.isPresent()) {
+            return expense.get();
+        }
+        throw new RuntimeException("Expense is not found for id " + id);
+    }
+
+    @Override
+    public void deleteExpenseById(Long id) {
+        repository.deleteById(id);
     }
     
 }
