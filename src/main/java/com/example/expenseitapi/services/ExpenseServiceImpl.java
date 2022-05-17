@@ -1,5 +1,7 @@
 package com.example.expenseitapi.services;
 
+import java.sql.Date;
+import java.util.List;
 import java.util.Optional;
 
 import com.example.expenseitapi.entities.Expense;
@@ -50,6 +52,29 @@ public class ExpenseServiceImpl implements ExpenseService {
         existingExpense.setCategory(expense.getCategory() != null ? expense.getCategory() : existingExpense.getCategory());
         existingExpense.setDate(expense.getDate() != null ? expense.getDate() : existingExpense.getDate());
         return repository.save(existingExpense);
+    }
+
+    @Override
+    public List<Expense> findExpenseByCategory(String category, Pageable page) {
+        return repository.findByCategory(category, page).toList();        
+    }
+
+    @Override
+    public List<Expense> findExpenseByNameContaining(String keyword, Pageable page) {
+        return repository.findByNameContaining(keyword, page).toList();
+    }
+
+    @Override
+    public List<Expense> findExpenseByDateBetween(Date startDate, Date endDate, Pageable page) {
+        if(startDate == null) {
+            startDate = new Date(0);
+        }
+
+        if(endDate == null) {
+            endDate = new Date(System.currentTimeMillis());
+        }
+
+        return repository.findByDateBetween(startDate, endDate, page).toList();
     }
     
 }

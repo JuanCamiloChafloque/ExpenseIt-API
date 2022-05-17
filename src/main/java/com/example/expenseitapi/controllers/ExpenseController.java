@@ -2,6 +2,7 @@ package com.example.expenseitapi.controllers;
 
 import com.example.expenseitapi.services.ExpenseService;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,5 +53,20 @@ public class ExpenseController {
     @PutMapping("/expenses/{id}")
     public Expense updateExpenseById(@PathVariable("id") Long id, @RequestBody Expense expense) {
         return expenseService.updateExpenseById(id, expense);
+    }
+
+    @GetMapping("/expenses/category")
+    public List<Expense> getExpensesByCategory(@RequestParam("category") String category, Pageable page) {
+        return expenseService.findExpenseByCategory(category, page);
+    }
+
+    @GetMapping("/expenses/name")
+    public List<Expense> getExpensesByKeyword(@RequestParam("keyword") String keyword, Pageable page) {
+        return expenseService.findExpenseByNameContaining(keyword, page);
+    }
+
+    @GetMapping("/expenses/date")
+    public List<Expense> getExpensesByKeyword(@RequestParam(required = false) Date startDate, @RequestParam(required = false) Date endDate, Pageable page) {
+        return expenseService.findExpenseByDateBetween(startDate, endDate, page);
     }
 }
