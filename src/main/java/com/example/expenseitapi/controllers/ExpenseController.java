@@ -4,6 +4,8 @@ import com.example.expenseitapi.services.ExpenseService;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.example.expenseitapi.entities.Expense;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +44,7 @@ public class ExpenseController {
 
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping("/expenses")
-    public Expense createExpense(@RequestBody Expense expense) {
+    public Expense createExpense(@Valid @RequestBody Expense expense) {
         return expenseService.createExpense(expense);
     }
 

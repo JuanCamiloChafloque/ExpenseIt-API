@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "expenses")
@@ -19,18 +22,23 @@ public class Expense {
     private Long id;
 
     @Column(name = "expense_name")
+    @NotBlank(message = "Expense name must not be BLANK")
+    @Size(min = 3, message = "Expense name must be at least 3 characters")
     private String name;
 
     @Column(name = "description")
     private String description;
 
     @Column(name = "expense_amount")
+    @NotNull(message = "Expense amount must not be NULL")
     private BigDecimal amount;
 
     @Column(name = "category")
+    @NotBlank(message = "Expense category must not be BLANK")
     private String category;
     
     @Column(name = "date")
+    @NotNull(message = "Expense date must not be NULL")
     private Date date;
 
     public void setId(Long id) {
