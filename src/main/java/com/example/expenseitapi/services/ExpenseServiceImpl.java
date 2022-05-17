@@ -3,6 +3,7 @@ package com.example.expenseitapi.services;
 import java.util.Optional;
 
 import com.example.expenseitapi.entities.Expense;
+import com.example.expenseitapi.exceptions.ResourceNotFoundException;
 import com.example.expenseitapi.repositories.ExpenseRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class ExpenseServiceImpl implements ExpenseService {
         if(expense.isPresent()) {
             return expense.get();
         }
-        throw new RuntimeException("Expense is not found for id " + id);
+        throw new ResourceNotFoundException("Expense not found for id: " + id);
     }
 
     @Override
