@@ -30,5 +30,15 @@ public class UserServiceImpl implements UserService {
     public User getCurrentUser(Long id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found with id " + id));
     }
+
+    @Override
+    public User updateCurrentUser(User user, Long id) {
+        User current = getCurrentUser(id);
+        current.setName(user.getName() != null ? user.getName() : current.getName());
+        current.setEmail(user.getEmail() != null ? user.getEmail() : current.getEmail());
+        current.setPassword(user.getPassword() != null ? user.getPassword() : current.getPassword());
+        current.setAge(user.getAge() != null ? user.getAge() : current.getAge());
+        return repository.save(current);
+    }
     
 }
