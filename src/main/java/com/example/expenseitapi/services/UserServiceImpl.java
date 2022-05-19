@@ -2,6 +2,7 @@ package com.example.expenseitapi.services;
 
 import com.example.expenseitapi.entities.User;
 import com.example.expenseitapi.entities.UserModel;
+import com.example.expenseitapi.exceptions.ItemAlreadyExistsException;
 import com.example.expenseitapi.repositories.UserRepository;
 
 import org.springframework.beans.BeanUtils;
@@ -16,6 +17,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(UserModel uModel) {
+        if(repository.existsByEmail(uModel.getEmail())) {
+            throw new ItemAlreadyExistsException("Uer is already registered with email " + uModel.getEmail());
+        }
         User user = new User();
         BeanUtils.copyProperties(uModel, user);
         return repository.save(user);
