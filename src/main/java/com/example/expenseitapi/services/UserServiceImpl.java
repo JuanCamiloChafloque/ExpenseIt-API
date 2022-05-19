@@ -40,5 +40,11 @@ public class UserServiceImpl implements UserService {
         current.setAge(user.getAge() != null ? user.getAge() : current.getAge());
         return repository.save(current);
     }
+
+    @Override
+    public void deleteCurrentUser(Long id) {
+        User user = getCurrentUser(id);
+        repository.delete(user);
+    }
     
 }

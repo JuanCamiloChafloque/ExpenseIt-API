@@ -8,4 +8,5 @@ public interface UserService {
     User createUser(UserModel user);
     User getCurrentUser(Long id);
     User updateCurrentUser(User user, Long id);
+    void deleteCurrentUser(Long id);
 }
