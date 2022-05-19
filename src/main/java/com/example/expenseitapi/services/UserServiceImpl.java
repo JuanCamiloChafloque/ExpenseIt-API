@@ -3,6 +3,7 @@ package com.example.expenseitapi.services;
 import com.example.expenseitapi.entities.User;
 import com.example.expenseitapi.entities.UserModel;
 import com.example.expenseitapi.exceptions.ItemAlreadyExistsException;
+import com.example.expenseitapi.exceptions.ResourceNotFoundException;
 import com.example.expenseitapi.repositories.UserRepository;
 
 import org.springframework.beans.BeanUtils;
@@ -23,6 +24,11 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         BeanUtils.copyProperties(uModel, user);
         return repository.save(user);
+    }
+
+    @Override
+    public User getCurrentUser(Long id) {
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found with id " + id));
     }
     
 }

@@ -6,4 +6,5 @@ import com.example.expenseitapi.entities.UserModel;
 public interface UserService {
 
     User createUser(UserModel user);
+    User getCurrentUser(Long id);
 }
