@@ -1,5 +1,7 @@
 package com.example.expenseitapi.controllers;
 
+import javax.validation.Valid;
+
 import com.example.expenseitapi.entities.User;
 import com.example.expenseitapi.entities.UserModel;
 import com.example.expenseitapi.services.UserService;
@@ -18,7 +20,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<User> createUser(@RequestBody UserModel uModel) {
+    public ResponseEntity<User> createUser(@Valid @RequestBody UserModel uModel) {
         return new ResponseEntity<>(userService.createUser(uModel), HttpStatus.CREATED);
     }
     

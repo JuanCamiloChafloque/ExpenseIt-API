@@ -1,9 +1,23 @@
 package com.example.expenseitapi.entities;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class UserModel {
+
+    @NotBlank(message = "User name must not be BLANK")
     private String name;
+
+    @NotNull(message = "User email must not be NULL")
+    @Email(message = "Enter a valid email")
     private String email;
+
+    @NotNull(message = "User password must not be NULL")
+    @Size(min = 5, message = "Password should be at least 5 characters")
     private String password;
+
     private Long age;
     
     public String getName() {
