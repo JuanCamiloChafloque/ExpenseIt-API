@@ -13,14 +13,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
-    //SELECT * FROM expenses WHERE category = ?
-    Page<Expense> findByCategory(String category, Pageable page);
+    //SELECT * FROM expenses WHERE user_id = ? AND category = ?
+    Page<Expense> findByUserIdAndCategory(Long userId, String category, Pageable page);
 
-    //SELECT * FROM expenses WHERE name LIKE '%keyword%'
-    Page<Expense> findByNameContaining(String keyword, Pageable page);
+    //SELECT * FROM expenses WHERE user_id = ? AND name LIKE '%keyword%'
+    Page<Expense> findByUserIdAndNameContaining(Long userId, String keyword, Pageable page);
 
-    //SELECT * FROM expenses WHERE date BETWEEN 'startDate' AND 'endDate'
-    Page<Expense> findByDateBetween(Date startDate, Date endDate, Pageable page);
+    //SELECT * FROM expenses WHERE user_id = ? AND date BETWEEN 'startDate' AND 'endDate'
+    Page<Expense> findByUserIdAndDateBetween(Long userId, Date startDate, Date endDate, Pageable page);
 
     //SELECT * FROM expenses WHERE user_id = ?
     Page<Expense> findByUserId(Long userId, Pageable page);
