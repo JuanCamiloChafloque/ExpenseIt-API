@@ -19,6 +19,9 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Autowired
     private ExpenseRepository repository;
 
+    @Autowired
+    private UserService userService;
+
     @Override
     public Page<Expense> getAllExpenses(Pageable page) {
         return repository.findAll(page);
@@ -41,6 +44,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public Expense createExpense(Expense expense) {
+        expense.setUser(userService.getLoggedInUser());
         return repository.save(expense);
     }
 

@@ -6,7 +6,8 @@ import com.example.expenseitapi.entities.UserModel;
 public interface UserService {
 
     User createUser(UserModel user);
-    User getCurrentUser(Long id);
-    User updateCurrentUser(User user, Long id);
-    void deleteCurrentUser(Long id);
+    User getUser(Long id);
+    User getLoggedInUser();
+    User updateUser(User user, Long id);
+    void deleteUser(Long id);
 }
