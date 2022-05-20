@@ -1,6 +1,7 @@
 package com.example.expenseitapi.repositories;
 
 import java.sql.Date;
+import java.util.Optional;
 
 import com.example.expenseitapi.entities.Expense;
 
@@ -23,4 +24,7 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
     //SELECT * FROM expenses WHERE user_id = ?
     Page<Expense> findByUserId(Long userId, Pageable page);
+
+    //SELECT * FROM expenses WHERE user_id = ? AND id = ?
+    Optional<Expense> findByUserIdAndId(Long userId, Long expenseId);
 }
